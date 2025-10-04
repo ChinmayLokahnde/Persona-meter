@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Roll Call</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #4e54c8;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 60%;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      transition: transform 0.3s ease;
+    }
+
+    table:hover {
+      transform: scale(1.02);
+    }
+
+    th, td {
+      padding: 14px 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #5563DE;
+      color: white;
+      font-size: 1.1rem;
+    }
+
+    /* Center align only the Roll Numbers column */
+    td:first-child, th:first-child {
+      text-align: center;
+    }
+
+    tr:hover td.name {
+      color: #5563DE;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transform: scale(1.05);
+      transition: all 0.3s ease-in-out;
+    }
+
+    td {
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    td.editable {
+      cursor: pointer;
+    }
+
+    td:focus {
+      outline: none;
+      background: #f0f8ff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    tr {
+      animation: fadeIn 0.4s ease-in;
+    }
+  </style>
+</head>
+<body>
+  <h1>Interactive Roll Call</h1>
+  <table id="rollcallTable">
+    <thead>
+      <tr>
+        <th>Roll Number</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const data = [
+      { Roll: 1, Name: "Waghmare Abhishek"},
+      { Roll: 2, Name: "Abhonkar Swayam"},
+      { Roll: 3, Name: "Awati Simrah Parvijkhan"},
+      { Roll: 4, Name: "Bagle Om"},
+      { Roll: 5, Name: "Bagmar Aashish"},
+      { Roll: 6, Name: "Bangar Kshitij"},
+      { Roll: 7, Name: "Dhomse Shivam"},
+      { Roll: 8, Name: "Dhuri Keshav"},
+      { Roll: 9, Name: "Dixit Sahil"},
+      { Roll: 10, Name: "Gaikwad Sayli"},
+      { Roll: 11, Name: "Gajare Kushal"},
+      { Roll: 12, Name: "Gundu Pradnya"},
+      { Roll: 13, Name: "Hanumante Prasanna"},
+      { Roll: 14, Name: "Jadhav Aarya"},
+      { Roll: 15, Name: "Khandare Elisha"},
+      { Roll: 16, Name: "Kokane Shreyash"},
+      { Roll: 17, Name: "More Ashutosh"},
+      { Roll: 18, Name: "Bhosale Om"},
+      { Roll: 19, Name: "Patil Rohan"},
+      { Roll: 20, Name: "Patil Sonal"},
+      { Roll: 21, Name: "Pawar Om"},
+      { Roll: 22, Name: "Raut Nishant"},
+      { Roll: 23, Name: "Raut Om"},
+      { Roll: 24, Name: "Shaikh Tofiq"},
+      { Roll: 25, Name: "Shendge Sonali"},
+      { Roll: 26, Name: "Sonar Soham"},
+      { Roll: 27, Name: "Varankar Renuka"},
+      { Roll: 28, Name: "Zadge Vedantee"},
+      { Roll: 29, Name: "Shaikh Kashish"},
+      { Roll: 30, Name: "Sonawane Harshal"},
+      { Roll: 31, Name: "Pawar Namrata"},
+      { Roll: 32, Name: "Bhandkar Eshwari"},
+      { Roll: 33, Name: "Lokhande Chinmay"},
+      { Roll: 34, Name: "Barangule Neha"},
+      { Roll: 35, Name: "Kothare Vishal"}
+    ];
+
+    const tableBody = document.querySelector("#rollcallTable tbody");
+
+    data.forEach(item => {
+      const row = document.createElement("tr");
+      const rollCell = document.createElement("td");
+      const nameCell = document.createElement("td");
+
+      rollCell.textContent = item.Roll;
+      nameCell.textContent = item.Name;
+      nameCell.classList.add("name");
+
+      // Make only roll number editable
+      rollCell.contentEditable = true;
+      rollCell.classList.add("editable");
+
+      row.appendChild(rollCell);
+      row.appendChild(nameCell);
+      tableBody.appendChild(row);
+    });
+  </script>
+</body>
+</html>
