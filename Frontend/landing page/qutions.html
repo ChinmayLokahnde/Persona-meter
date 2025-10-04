@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TalentIQ – Teacher Evaluation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #f5f6ff;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #4e54c8, #8f94fb);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .section {
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      color: #4e54c8;
+      margin-bottom: 1rem;
+    }
+
+    .form-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    }
+
+    .question {
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+
+    .question h3 {
+      margin-bottom: 0.5rem;
+      color: #4e54c8;
+    }
+
+    .question p {
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+      color: #555;
+    }
+
+    .options {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    input[type="radio"] {
+      transform: scale(1.2);
+      accent-color: #4e54c8;
+      cursor: pointer;
+    }
+
+    .commit-btn {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .commit-btn button {
+      background: linear-gradient(135deg, #4e54c8, #8f94fb);
+      color: white;
+      border: none;
+      padding: 0.9rem 2rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .commit-btn button:hover {
+      background: #3d3fa6;
+    }
+
+    footer {
+      background: #222;
+      color: #aaa;
+      padding: 1.5rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>TalentIQ – Teacher Evaluation</h1>
+    <p>Provide your remarks on student performance and overall behavior</p>
+  </header>
+
+  <!-- TEACHER FORM -->
+  <section class="section">
+    <h2>Student Assessment Form</h2>
+    <div class="form-container">
+
+      <!-- Question Block -->
+      <div class="question">
+        <h3>1. Academics</h3>
+        <p>Evaluate the student’s performance in studies, consistency in grades, and overall learning ability.</p>
+        <div class="options">
+          <label><input type="radio" name="academics" value="1"> 1</label>
+          <label><input type="radio" name="academics" value="2"> 2</label>
+          <label><input type="radio" name="academics" value="3"> 3</label>
+          <label><input type="radio" name="academics" value="4"> 4</label>
+          <label><input type="radio" name="academics" value="5"> 5</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>2. Discipline & Punctuality</h3>
+        <p>Consider the student’s behavior, regularity in attendance, and ability to submit work on time.</p>
+        <div class="options">
+          <label><input type="radio" name="discipline" value="1"> 1</label>
+          <label><input type="radio" name="discipline" value="2"> 2</label>
+          <label><input type="radio" name="discipline" value="3"> 3</label>
+          <label><input type="radio" name="discipline" value="4"> 4</label>
+          <label><input type="radio" name="discipline" value="5"> 5</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>3. Respect & Etiquette</h3>
+        <p>Assess how the student interacts respectfully with teachers, peers, and other staff.</p>
+        <div class="options">
+          <label><input type="radio" name="respect" value="1"> 1</label>
+          <label><input type="radio" name="respect" value="2"> 2</label>
+          <label><input type="radio" name="respect" value="3"> 3</label>
+          <label><input type="radio" name="respect" value="4"> 4</label>
+          <label><input type="radio" name="respect" value="5"> 5</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>4. Certification</h3>
+        <p>Rate the student’s efforts in earning relevant certifications and showcasing additional knowledge.</p>
+        <div class="options">
+          <label><input type="radio" name="certification" value="1"> 1</label>
+          <label><input type="radio" name="certification" value="2"> 2</label>
+          <label><input type="radio" name="certification" value="3"> 3</label>
+          <label><input type="radio" name="certification" value="4"> 4</label>
+          <label><input type="radio" name="certification" value="5"> 5</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>5. Leadership & Teamwork</h3>
+        <p>Judge the student’s ability to lead initiatives, support group tasks, and collaborate effectively.</p>
+        <div class="options">
+          <label><input type="radio" name="leadership" value="1"> 1</label>
+          <label><input type="radio" name="leadership" value="2"> 2</label>
+          <label><input type="radio" name="leadership" value="3"> 3</label>
+          <label><input type="radio" name="leadership" value="4"> 4</label>
+          <label><input type="radio" name="leadership" value="5"> 5</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>6. Helpfulness</h3>
+        <p>Measure how often the student assists peers, contributes positively, and shows empathy.</p>
+        <div class="options">
+          <label><input type="radio" name="helpfulness" value="1"> 1</label>
+          <label><input type="radio" name="helpfulness" value="2"> 2</label>
+          <label><input type="radio" name="helpfulness" value="3"> 3</label>
+          <label><input type="radio" name="helpfulness" value="4"> 4</label>
+          <label><input type="radio" name="helpfulness" value="5"> 5</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>7. Participation in Activities</h3>
+        <p>Evaluate the student’s engagement in cultural, sports, or academic extracurricular activities.</p>
+        <div class="options">
+          <label><input type="radio" name="participation" value="1"> 1</label>
+          <label><input type="radio" name="participation" value="2"> 2</label>
+          <label><input type="radio" name="participation" value="3"> 3</label>
+          <label><input type="radio" name="participation" value="4"> 4</label>
+          <label><input type="radio" name="participation" value="5"> 5</label>
+        </div>
+      </div>
+
+      <div class="question">
+        <h3>8. Skill Score</h3>
+        <p>Rate the student’s technical, creative, or analytical skills that contribute to their overall growth.</p>
+        <div class="options">
+          <label><input type="radio" name="skills" value="1"> 1</label>
+          <label><input type="radio" name="skills" value="2"> 2</label>
+          <label><input type="radio" name="skills" value="3"> 3</label>
+          <label><input type="radio" name="skills" value="4"> 4</label>
+          <label><input type="radio" name="skills" value="5"> 5</label>
+        </div>
+      </div>
+
+      <!-- Commit Button -->
+      <div class="commit-btn">
+        <button onclick="alert('Responses submitted successfully!')">Commit</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 TalentIQ. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
+
+TEACHER EVALUATION PAGE

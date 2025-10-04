@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TalentIQ – Smarter Hiring Decisions</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #f5f6ff;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: linear-gradient(135deg, #4e54c8, #8f94fb);
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Decorative Background Circles */
+    header::before, header::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 1;
+    }
+
+    header::before {
+      width: 300px; height: 300px;
+      top: -100px; left: -100px;
+    }
+    header::after {
+      width: 250px; height: 250px;
+      bottom: -80px; right: -80px;
+    }
+
+    /* ===== LOGO ===== */
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      z-index: 2;
+      position: relative;
+    }
+
+    .logo-icon {
+      width: 35px;
+      height: 35px;
+      background: white;
+      color: #4e54c8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #ddd;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    nav a {
+      margin: 0 0.8rem;
+      text-decoration: none;
+      color: #4e54c8;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #222;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .auth-buttons button {
+      background: #4e54c8;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .auth-buttons button:hover {
+      background: #333;
+    }
+
+    /* ===== SECTIONS ===== */
+    .section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 2.2rem;
+      color: #4e54c8;
+      margin-bottom: 1rem;
+    }
+
+    .section p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: #555;
+    }
+
+    /* ===== FEATURES ===== */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .card h3 {
+      color: #4e54c8;
+      margin-bottom: 0.8rem;
+    }
+
+    /* ===== CTA ===== */
+    .cta {
+      background: linear-gradient(135deg, #4e54c8, #8f94fb);
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: 15px;
+      margin: 3rem auto;
+      max-width: 700px;
+    }
+
+    .cta h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta button {
+      background: white;
+      color: #4e54c8;
+      border: none;
+      padding: 0.9rem 1.8rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .cta button:hover {
+      background: #ddd;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #222;
+      color: #aaa;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    footer a {
+      color: #8f94fb;
+      text-decoration: none;
+    }
+
+    /* ===== MODAL ===== */
+    .modal {
+      display: none;
+      opacity: 0;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.4s ease;
+    }
+
+    .modal.show {
+      opacity: 1;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 350px;
+      max-width: 90%;
+      text-align: center;
+      position: relative;
+      transform: translateY(-30px);
+      transition: transform 0.3s ease;
+    }
+
+    .modal.show .modal-content {
+      transform: translateY(0);
+    }
+
+    .modal-content h2 {
+      color: #4e54c8;
+      margin-bottom: 1rem;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 0.7rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+
+    .modal-content button {
+      background: #4e54c8;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 6px;
+      font-weight: bold;
+      margin-top: 1rem;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .modal-content .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon">IQ</div>
+      TalentIQ
+    </div>
+    <h1>Smarter Candidate Profiling</h1>
+    <p>AI-powered insights + behavioral analysis for smarter hiring decisions</p>
+  </header>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#impact">Impact</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="auth-buttons">
+      <button onclick="openModal('loginModal')">Login</button>
+      <button onclick="openModal('registerModal')">Register</button>
+    </div>
+  </nav>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <h2>What is TalentIQ?</h2>
+    <p>
+      TalentIQ goes beyond resumes. It measures both technical and personal skills, 
+      giving recruiters a 360° view of candidates through AI-powered insights and 
+      behavioral assessments.
+    </p>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <h2>Key Features</h2>
+    <div class="features">
+      <div class="card">
+        <h3>Behavioral Tests</h3>
+        <p>Assess teamwork, leadership, adaptability, and problem-solving skills.</p>
+      </div>
+      <div class="card">
+        <h3>Soft Skill Analysis</h3>
+        <p>Evaluate communication, decision-making, and emotional intelligence.</p>
+      </div>
+      <div class="card">
+        <h3>AI-Powered Insights</h3>
+        <p>Generate reports and scores benchmarked to industry standards.</p>
+      </div>
+      <div class="card">
+        <h3>TalentIQ Certificate</h3>
+        <p>Showcase your strengths with a professional certification report.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="impact">
+    <h3>Boost Employability with TalentIQ</h3>
+    <p>
+      Whether you’re a student, job seeker, or recruiter – TalentIQ provides the insights 
+      needed to make smarter hiring decisions and showcase the complete picture.
+    </p>
+    <button onclick="alert('Thank you for showing interest! We will contact you soon.')">
+      Get Started
+    </button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <p>© 2025 TalentIQ. All rights reserved.</p>
+    <p>Contact us at <a href="mailto:info@talentiq.com">info@talentiq.com</a></p>
+  </footer>
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('loginModal')">&times;</span>
+      <h2>Login</h2>
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <button>Login</button>
+    </div>
+  </div>
+
+  <!-- REGISTER MODAL -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('registerModal')">&times;</span>
+      <h2>Register</h2>
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <input type="password" placeholder="Confirm Password" required>
+      <button>Register</button>
+    </div>
+  </div>
+
+  <script>
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      modal.style.display = "flex"; // make sure it's visible
+      setTimeout(() => {
+        modal.classList.add('show');
+      }, 10); // tiny delay to allow fade-in
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      modal.classList.remove('show');
+      setTimeout(() => {
+        modal.style.display = "none"; // hide after fade out
+      }, 400); // matches transition time
+    }
+
+    // Close modal when clicking outside content
+    window.onclick = function(event) {
+      let login = document.getElementById("loginModal");
+      let register = document.getElementById("registerModal");
+      if (event.target === login) closeModal("loginModal");
+      if (event.target === register) closeModal("registerModal");
+    }
+  </script>
+
+</body>
+</html>

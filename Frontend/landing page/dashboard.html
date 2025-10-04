@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Analytics Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 24px;
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+      padding: 20px;
+      gap: 20px;
+    }
+    .left-panel {
+      flex: 1;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow-y: auto;
+      height: 80vh;
+    }
+    .right-panel {
+      flex: 2;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    table th {
+      background: #2c3e50;
+      color: white;
+    }
+    tr:hover {
+      background: #f1f1f1;
+      cursor: pointer;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    canvas {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>📊 Student Analytics Dashboard</header>
+  <div class="container">
+    <!-- Left Panel -->
+    <div class="left-panel">
+      <h3>Student List</h3>
+      <input type="text" id="search" placeholder="Search student...">
+      <table id="studentTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Academics</th>
+            <th>Skill</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    
+    <!-- Right Panel -->
+    <div class="right-panel">
+      <h3 id="studentName">Select a student</h3>
+      <canvas id="radarChart"></canvas>
+      <canvas id="barChart"></canvas>
+      <canvas id="pieChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // Load dataset (mocked from your Excel file preview)
+    const students = [
+      {name:"Waghmare Abhishek", academics:2, discipline:10, etiquette:2, certification:3, leadership:5, helpfulness:3, participation:10, skill:1},
+      {name:"Abhonkar Swayam", academics:10, discipline:6, etiquette:7, certification:9, leadership:2, helpfulness:5, participation:3, skill:3},
+      {name:"Awati Simrah", academics:4, discipline:4, etiquette:4, certification:3, leadership:7, helpfulness:5, participation:1, skill:1},
+      {name:"Bagle Om", academics:5, discipline:2, etiquette:4, certification:7, leadership:1, helpfulness:9, participation:6, skill:1},
+      {name:"Bagmar Aashish", academics:4, discipline:7, etiquette:1, certification:7, leadership:10, helpfulness:10, participation:10, skill:2}
+    ];
+
+    const tbody = document.querySelector("#studentTable tbody");
+    const search = document.getElementById("search");
+
+    // Populate table
+    function renderTable(data) {
+      tbody.innerHTML = "";
+      data.forEach((s, i) => {
+        const row = `<tr onclick="showAnalytics(${i})">
+          <td>${s.name}</td>
+          <td contenteditable="true">${s.academics}</td>
+          <td contenteditable="true">${s.skill}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+    renderTable(students);
+
+    // Search filter
+    search.addEventListener("keyup", () => {
+      const val = search.value.toLowerCase();
+      const filtered = students.filter(s => s.name.toLowerCase().includes(val));
+      renderTable(filtered);
+    });
+
+    // Chart.js setup
+    let radarChart, barChart, pieChart;
+
+    function showAnalytics(index) {
+      const s = students[index];
+      document.getElementById("studentName").innerText = s.name;
+
+      const labels = ["Academics","Discipline","Etiquette","Certification","Leadership","Helpfulness","Participation","Skill"];
+      const values = [s.academics,s.discipline,s.etiquette,s.certification,s.leadership,s.helpfulness,s.participation,s.skill];
+
+      // Destroy old charts before creating new
+      if (radarChart) radarChart.destroy();
+      if (barChart) barChart.destroy();
+      if (pieChart) pieChart.destroy();
+
+      // Radar Chart
+      radarChart = new Chart(document.getElementById("radarChart"), {
+        type: "radar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: s.name,
+            data: values,
+            backgroundColor: "rgba(54, 162, 235, 0.2)",
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 2
+          }]
+        },
+        options: {responsive: true}
+      });
+
+      // Bar Chart
+      barChart = new Chart(document.getElementById("barChart"), {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "Scores",
+            data: values,
+            backgroundColor: "rgba(255, 99, 132, 0.6)"
+          }]
+        }
+      });
+
+      // Pie Chart
+      pieChart = new Chart(document.getElementById("pieChart"), {
+        type: "pie",
+        data: {
+          labels: labels,
+          datasets: [{
+            data: values,
+            backgroundColor: [
+              "#FF6384","#36A2EB","#FFCE56","#4BC0C0","#9966FF","#FF9F40","#66BB6A","#D32F2F"
+            ]
+          }]
+        }
+      });
+    }
+  </script>
+</body>
+</html>
