@@ -379,7 +379,7 @@
       <h2>Login</h2>
       <input type="email" placeholder="Email" required>
       <input type="password" placeholder="Password" required>
-      <button>Login</button>
+      <button onclick="loginUser()">Login</button>
     </div>
   </div>
 
@@ -392,7 +392,7 @@
       <input type="email" placeholder="Email" required>
       <input type="password" placeholder="Password" required>
       <input type="password" placeholder="Confirm Password" required>
-      <button>Register</button>
+      <button onclick="registerUser()">Register</button>
     </div>
   </div>
 
@@ -421,6 +421,73 @@
       if (event.target === register) closeModal("registerModal");
     }
   </script>
+  <script>
+  // REGISTER USER
+  async function registerUser() {
+    const name = document.querySelector('#registerModal input[placeholder="Full Name"]').value;
+    const email = document.querySelector('#registerModal input[placeholder="Email"]').value;
+    const password = document.querySelector('#registerModal input[placeholder="Password"]').value;
+    const confirmPassword = document.querySelector('#registerModal input[placeholder="Confirm Password"]').value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("✅ Registered Successfully!");
+        closeModal("registerModal");
+      } else {
+        alert("❌ " + (data.message || "Registration failed"));
+      }
+    } catch (error) {
+      alert("Error: " + error.message);
+    }
+  }
+
+  // LOGIN USER
+  async function loginUser() {
+    const email = document.querySelector('#loginModal input[placeholder="Email"]').value;
+    const password = document.querySelector('#loginModal input[placeholder="Password"]').value;
+
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("✅ Login Successful!");
+        localStorage.setItem("user", JSON.stringify(data)); // save token & user info
+        closeModal("loginModal");
+
+        // Optional: redirect based on role
+        if (data.role === "teacher") {
+          window.location.href = "teacher-dashboard.html";
+        } else {
+          window.location.href = "student-dashboard.html";
+        }
+      } else {
+        alert("❌ " + (data.message || "Invalid credentials"));
+      }
+    } catch (error) {
+      alert("Error: " + error.message);
+    }
+  }
+</script>
+
 
 </body>
 </html>

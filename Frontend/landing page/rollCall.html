@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Roll Call</title>
+  <style>
+    /* (your existing CSS remains same) */
+  </style>
+</head>
+<body>
+  <h1>Interactive Roll Call</h1>
+  <table id="rollcallTable">
+    <thead>
+      <tr>
+        <th>Roll Number</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const tableBody = document.querySelector("#rollcallTable tbody");
+
+    async function loadStudents() {
+      try {
+        // fetch data from backend
+        const res = await fetch("http://localhost:5000/api/students");
+        const students = await res.json();
+
+        // clear table first
+        tableBody.innerHTML = "";
+
+        students.forEach((student, index) => {
+          const row = document.createElement("tr");
+          const rollCell = document.createElement("td");
+          const nameCell = document.createElement("td");
+
+          rollCell.textContent = student.rollNumber || index + 1; // assuming rollNumber field
+          nameCell.textContent = student.name;
+          nameCell.classList.add("name");
+
+          rollCell.contentEditable = true;
+          rollCell.classList.add("editable");
+
+          row.appendChild(rollCell);
+          row.appendChild(nameCell);
+          tableBody.appendChild(row);
+        });
+      } catch (error) {
+        console.error("Error loading students:", error);
+        tableBody.innerHTML = "<tr><td colspan='2'>Failed to load student data</td></tr>";
+      }
+    }
+
+    // Load students when page opens
+    loadStudents();
+  </script>
+</body>
+</html>
